@@ -26,12 +26,12 @@
                         <Blend />
                      </effect>
                   </Text>
-                  <TextField promptText="Enter Download URL here">
+                  <TextField fx:id="urlTextField" promptText="Enter Download URL here">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </TextField>
-                  <Button mnemonicParsing="false" style="-fx-background-radius: 5%; -fx-background-color: #00bd56;" text="Start Download">
+                  <Button mnemonicParsing="false" onAction="#downloadButtonClicked" style="-fx-background-radius: 5%; -fx-background-color: #00bd56;" text="Start Download">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -42,7 +42,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
          <center>
-            <TableView prefHeight="402.0" prefWidth="732.0" style="-fx-border-color: black;" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableView" prefHeight="402.0" prefWidth="732.0" style="-fx-border-color: black;" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn prefWidth="75.0" text="S.No" />
                 <TableColumn prefWidth="75.0" text="File Name" />
