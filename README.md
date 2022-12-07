@@ -1,5 +1,5 @@
 # ```JAVA_IDM``` => Internet Download ⬇️ Manager🎉
--### IDM based on ```JAVA``` 👨‍💻
+- ### IDM based on ```JAVA``` 👨‍💻
 - [x] For designing ***frontend/UI*** ✍️ ```FXML``` is used with ```SceneBuilder```💪
 
 - ## And the main part of this project 🎦 is that ```MultiThreading``` concept is applied to download 
