@@ -1,5 +1,6 @@
 package org.example;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -9,6 +10,7 @@ import org.example.config.AppConfig;
 import org.example.models.FileInfo;
 
 import java.io.File;
+import java.text.DecimalFormat;
 
 public class DownloadManager {
 
@@ -23,12 +25,12 @@ public class DownloadManager {
     void downloadButtonClicked(ActionEvent event) {
 
         String url=urlTextField.getText().trim();
-        //https://ManishSyal.com/python.exe
+        //eg:- https://ManishSyal.com/python.exe
         String filename = url.substring(url.lastIndexOf("/") + 1);
         String status="STARTING";
         String action="OPEN";
         String path= AppConfig.DOWNLOAD_PATH+ File.separator+filename;
-        FileInfo file= new FileInfo((index + 1) +"", filename,url,status,action,path);  //creating object of FileInfo class and passing all the collected data from user in constructor
+        FileInfo file= new FileInfo((index + 1) +"", filename,url,status,action,path,"0");  //creating object of FileInfo class and passing all the collected data from user in constructor
         this.index=this.index+1;
         DownloadThread thread=new DownloadThread(file,this);
         this.tableView.getItems().add(Integer.parseInt(file.getIndex())-1,file);
@@ -40,7 +42,9 @@ public class DownloadManager {
     public void updateUI(FileInfo metafile) {
         System.out.println(metafile);
         FileInfo fileInfo= this.tableView.getItems().get(Integer.parseInt(metafile.getIndex())-1);
-        fileInfo.setStatus(metafile.getStatus());
+        fileInfo.setStatus(metafile.getStatus());  //changing the UI or column values here
+        DecimalFormat decimalFormat=new DecimalFormat("0.0"); //to roundOff the decimal upto 2 digits
+        fileInfo.setPer(decimalFormat.format(Double.parseDouble(metafile.getPer())));
         this.tableView.refresh();
         System.out.println("_________________________________");
     }
@@ -73,8 +77,16 @@ public class DownloadManager {
            return p.getValue().statusProperty();
         });
 
+        // % Completed
+        TableColumn<FileInfo, String> per = (TableColumn<FileInfo, String>) this.tableView.getColumns().get(4);
+        per.setCellValueFactory(p->{
+            SimpleStringProperty simpleStringProperty=new SimpleStringProperty();
+            simpleStringProperty.set(p.getValue().getPer()+" %");
+           return simpleStringProperty;
+        });
+
         //Action
-        TableColumn<FileInfo, String> action = (TableColumn<FileInfo, String>) this.tableView.getColumns().get(4);
+        TableColumn<FileInfo, String> action = (TableColumn<FileInfo, String>) this.tableView.getColumns().get(5);
         action.setCellValueFactory(p->{
            return p.getValue().actionProperty();
         });

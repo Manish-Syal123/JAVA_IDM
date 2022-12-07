@@ -48,6 +48,7 @@
                 <TableColumn prefWidth="75.0" text="File Name" />
                   <TableColumn prefWidth="75.0" text="File URL" />
                   <TableColumn prefWidth="75.0" text="Status" />
+                  <TableColumn prefWidth="75.0" text="\% Completed" />
                   <TableColumn prefWidth="75.0" text="Action" />
               </columns>
                <columnResizePolicy>
